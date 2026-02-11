@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center">Available Job Postings</h1>
+
+    <form method="GET" action="{{ url_for('index') }}" class="mt-4">
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" name="q" placeholder="Search by title, company, or description..." value="{{ query }}" style="flex-grow: 1;">
+            <select name="type" onchange="this.form.submit()">
+                <option value="">All Job Types</option>
+                {% for type in job_types %}
+                    <option value="{{ type }}" {% if job_type_filter == type %}selected{% endif %}>{{ type }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    {% if jobs %}
+        <div class="job-list">
+            {% for job in jobs %}
+                <div class="job-card" style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); margin-bottom: 15px;">
+                    <h2 style="margin-top: 0; color: #0a192f;">{{ job.title }}</h2>
+                    <p><strong>Company:</strong> {{ job.company }}</p>
+                    <p><strong>Location:</strong> {{ job.location }}</p>
+                    <p><strong>Type:</strong> <span style="background-color: #e2f0e6; color: #155724; padding: 5px 10px; border-radius: 4px; font-size: 0.9em;">{{ job.job_type }}</span></p>
+                    <p><strong>Posted:</strong> {{ job.posted_date.strftime('%Y-%m-%d') }}</p>
+                    <a href="{{ url_for('job_detail', job_id=job.id) }}" class="btn btn-primary">View Details</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No jobs found matching your criteria.</p>
+    {% endif %}
+{% endblock %}

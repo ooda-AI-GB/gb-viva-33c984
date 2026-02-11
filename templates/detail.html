@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="job-detail" style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+        <h1 style="color: #0a192f; margin-top: 0;">{{ job.title }}</h1>
+        <p style="font-size: 1.1em;"><strong>Company:</strong> {{ job.company }}</p>
+        <p style="font-size: 1.1em;"><strong>Location:</strong> {{ job.location }}</p>
+        <p style="font-size: 1.1em;"><strong>Type:</strong> <span style="background-color: #e2f0e6; color: #155724; padding: 5px 10px; border-radius: 4px; font-size: 0.9em;">{{ job.job_type }}</span></p>
+        {% if job.salary_range %}
+            <p style="font-size: 1.1em;"><strong>Salary:</strong> {{ job.salary_range }}</p>
+        {% endif %}
+        <p style="font-size: 1.1em;"><strong>Posted:</strong> {{ job.posted_date.strftime('%Y-%m-%d') }}</p>
+
+        <h2 style="color: #0a192f; margin-top: 30px;">Description</h2>
+        <p style="line-height: 1.6;">{{ job.description }}</p>
+
+        <h2 style="color: #0a192f; margin-top: 30px;">Requirements</h2>
+        <p style="line-height: 1.6;">{{ job.requirements }}</p>
+
+        <h2 style="color: #0a192f; margin-top: 30px;">How to Apply</h2>
+        <div style="background-color: #e8f0fe; padding: 20px; border-left: 5px solid #10b981; border-radius: 5px;">
+            <p style="margin: 0; line-height: 1.6;">{{ job.how_to_apply }}</p>
+        </div>
+
+        <p class="mt-4"><a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Job List</a></p>
+    </div>
+{% endblock %}

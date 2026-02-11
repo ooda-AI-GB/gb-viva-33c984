@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center">Post a New Job</h1>
+    <div style="max-width: 600px; margin: 30px auto;">
+        <form method="POST" action="{{ url_for('admin_post') }}">
+            <div class="form-group">
+                <label for="title">Job Title</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="job_type">Job Type</label>
+                <select id="job_type" name="job_type" required>
+                    <option value="Full-time">Full-time</option>
+                    <option value="Part-time">Part-time</option>
+                    <option value="Remote">Remote</option>
+                    <option value="Contract">Contract</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="salary_range">Salary Range (e.g., $80,000 - $100,000)</label>
+                <input type="text" id="salary_range" name="salary_range">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="requirements">Requirements</label>
+                <textarea id="requirements" name="requirements" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="how_to_apply">How to Apply</label>
+                <textarea id="how_to_apply" name="how_to_apply" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Post Job</button>
+        </form>
+    </div>
+{% endblock %}
